@@ -1,11 +1,6 @@
-# Lab Session 01 - Set A (roll numbers ending with odd digits)
-# Subject: 22AIE213
-
 import random
-import statistics
 
 
-# Q1: Count pairs of elements with sum equal to 10
 def count_pairs_with_sum(numbers, target):
     count = 0
     for i in range(len(numbers)):
@@ -15,14 +10,12 @@ def count_pairs_with_sum(numbers, target):
     return count
 
 
-# Q2: Return the range (max - min) of a list. Error if less than 3 elements
 def find_range(numbers):
     if len(numbers) < 3:
         return "Range determination not possible"
     return max(numbers) - min(numbers)
 
 
-# Q3: Return A raised to the power m (matrix multiplication)
 def multiply_matrices(a, b):
     rows = len(a)
     cols = len(b[0])
@@ -42,7 +35,6 @@ def matrix_power(matrix, m):
     return result
 
 
-# Q4: Find the highest occurring alphabet character and its count
 def highest_occurring_char(text):
     counts = {}
     for ch in text:
@@ -52,37 +44,46 @@ def highest_occurring_char(text):
     return top_char, counts[top_char]
 
 
-# Q5: Generate 25 random numbers (1-10) and find mean, median, mode
+def find_mean(numbers):
+    return sum(numbers) / len(numbers)
+
+
+def find_median(numbers):
+    sorted_numbers = sorted(numbers)
+    n = len(sorted_numbers)
+    mid = n // 2
+    if n % 2 == 0:
+        return (sorted_numbers[mid - 1] + sorted_numbers[mid]) / 2
+    return sorted_numbers[mid]
+
+
+def find_mode(numbers):
+    counts = {}
+    for number in numbers:
+        counts[number] = counts.get(number, 0) + 1
+    return max(counts, key=counts.get)
+
+
 def random_stats():
     numbers = [random.randint(1, 10) for _ in range(25)]
-    mean_value = statistics.mean(numbers)
-    median_value = statistics.median(numbers)
-    mode_value = statistics.mode(numbers)
-    return numbers, mean_value, median_value, mode_value
+    return numbers, find_mean(numbers), find_median(numbers), find_mode(numbers)
 
 
-# Main program (all print statements are here)
-if __name__ == "__main__":
-    # Q1
-    given_list = [2, 7, 4, 1, 3, 6]
-    print("Q1: Pairs with sum 10 =", count_pairs_with_sum(given_list, 10))
+given_list = [2, 7, 4, 1, 3, 6]
+print("Q1: Pairs with sum 10 =", count_pairs_with_sum(given_list, 10))
 
-    # Q2
-    range_list = [5, 3, 8, 1, 0, 4]
-    print("Q2: Range =", find_range(range_list))
-    print("Q2: Range (small list) =", find_range([5, 3]))
+range_list = [5, 3, 8, 1, 0, 4]
+print("Q2: Range =", find_range(range_list))
+print("Q2: Range (small list) =", find_range([5, 3]))
 
-    # Q3
-    matrix_a = [[1, 2], [3, 4]]
-    power_m = 2
-    print("Q3: A^m =", matrix_power(matrix_a, power_m))
+matrix_a = [[1, 2], [3, 4]]
+power_m = 2
+print("Q3: A^m =", matrix_power(matrix_a, power_m))
 
-    # Q4
-    input_string = "hippopotamus"
-    char, occurrence = highest_occurring_char(input_string)
-    print("Q4: Highest occurring char =", char, "count =", occurrence)
+input_string = "hippopotamus"
+char, occurrence = highest_occurring_char(input_string)
+print("Q4: Highest occurring char =", char, "count =", occurrence)
 
-    # Q5
-    numbers, mean_value, median_value, mode_value = random_stats()
-    print("Q5: Numbers =", numbers)
-    print("Q5: Mean =", mean_value, "Median =", median_value, "Mode =", mode_value)
+numbers, mean_value, median_value, mode_value = random_stats()
+print("Q5: Numbers =", numbers)
+print("Q5: Mean =", mean_value, "Median =", median_value, "Mode =", mode_value)
