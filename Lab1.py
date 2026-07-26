@@ -1,7 +1,7 @@
 import random
+import statistics
 
-
-def count_pairs_with_sum(numbers, target):
+def counting(numbers, target):
     count = 0
     for i in range(len(numbers)):
         for j in range(i + 1, len(numbers)):
@@ -9,12 +9,10 @@ def count_pairs_with_sum(numbers, target):
                 count += 1
     return count
 
-
 def find_range(numbers):
     if len(numbers) < 3:
-        return "Range determination not possible"
+        return "range is not possible"
     return max(numbers) - min(numbers)
-
 
 def multiply_matrices(a, b):
     rows = len(a)
@@ -34,7 +32,6 @@ def matrix_power(matrix, m):
         result = multiply_matrices(result, matrix)
     return result
 
-
 def highest_occurring_char(text):
     counts = {}
     for ch in text:
@@ -44,33 +41,15 @@ def highest_occurring_char(text):
     return top_char, counts[top_char]
 
 
-def find_mean(numbers):
-    return sum(numbers) / len(numbers)
-
-
-def find_median(numbers):
-    sorted_numbers = sorted(numbers)
-    n = len(sorted_numbers)
-    mid = n // 2
-    if n % 2 == 0:
-        return (sorted_numbers[mid - 1] + sorted_numbers[mid]) / 2
-    return sorted_numbers[mid]
-
-
-def find_mode(numbers):
-    counts = {}
-    for number in numbers:
-        counts[number] = counts.get(number, 0) + 1
-    return max(counts, key=counts.get)
-
-
 def random_stats():
     numbers = [random.randint(1, 10) for _ in range(25)]
-    return numbers, find_mean(numbers), find_median(numbers), find_mode(numbers)
+    mean_value = statistics.mean(numbers)
+    median_value = statistics.median(numbers)
+    mode_value = statistics.mode(numbers)
+    return numbers, mean_value, median_value, mode_value
 
-
-given_list = [2, 7, 4, 1, 3, 6]
-print("Q1: Pairs with sum 10 =", count_pairs_with_sum(given_list, 10))
+givenlist = [2, 7, 4, 1, 3, 6]
+print("sum of 10", counting(givenlist, 10))
 
 range_list = [5, 3, 8, 1, 0, 4]
 print("Q2: Range =", find_range(range_list))
