@@ -59,6 +59,28 @@ def dotproduct(a,b):
 def norm(a):
     return dotproduct(a,a)**0.5             
 
+#A8
+def mean(data):
+    return sum(data)/len(data)
+
+def variance(data):
+    m=mean(data)
+    return sum((x-m)**2 for x in data)/len(data)
+    
+def std(data):
+    return variance(data)**0.5
+    
+def matrixstats(matrix):
+    means=[]
+    variances=[]
+    stds=[]
+    for i in range(len(matrix[0])):
+        column=[row[i] for row in matrix]
+        means.append(mean(column))
+        variances.append(variance(column))
+        stds.append(std(column))
+    return means,variances,stds
+
 if __name__ == "__main__":
     education = ["Graduation", "PhD", "Master", "Graduation", "Basic"]
     labels,labelmap=labelencoding(education)
@@ -100,3 +122,9 @@ if __name__ == "__main__":
     print(np.linalg.norm(veca))
     print(norm(vecb))
     print(np.linalg.norm(vecb))
+
+    matrix=vectors.values.tolist()
+    means,variances,stds=matrixstats(matrix)
+    print(means)
+    print(variances)
+    print(stds)
