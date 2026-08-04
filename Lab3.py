@@ -81,6 +81,22 @@ def matrixstats(matrix):
         stds.append(std(column))
     return means,variances,stds
 
+#A9
+def comparestats(matrix):
+    mymeans,myvars,mystds=matrixstats(matrix)
+    npmeans=np.mean(matrix,axis=0)          
+    npstds=np.std(matrix,axis=0)
+    rows=[]
+    for i in range(len(mymeans)):
+        rows.append([mymeans[i],npmeans[i],abs(mymeans[i]-npmeans[i]),
+                     mystds[i],npstds[i],abs(mystds[i]-npstds[i])])
+    return rows
+
+#A10
+def histdata(feature,buckets):
+    counts,edges=np.histogram(feature,bins=buckets)     #data in ranges
+    return counts,edges,mean(feature),variance(feature)
+
 if __name__ == "__main__":
     education = ["Graduation", "PhD", "Master", "Graduation", "Basic"]
     labels,labelmap=labelencoding(education)
@@ -128,3 +144,19 @@ if __name__ == "__main__":
     print(means)
     print(variances)
     print(stds)
+
+    #A9
+    for name,row in zip(vectors.columns,comparestats(matrix)):
+        print(name,"| mean mine=",row[0],"numpy=",row[1],"diff=",row[2],
+              "| std mine=",row[3],"numpy=",row[4],"diff=",row[5])
+
+    #A10
+    feature=list(vectors["MntWines"])
+    counts,edges,fmean,fvar=histdata(feature,10)
+    for i in range(len(counts)):
+        print("range",edges[i],"to",edges[i+1],"count=",counts[i])
+    print("mean=",fmean,"variance=",fvar)
+    plt.hist(feature,bins=10)
+    plt.xlabel("MntWines")
+    plt.ylabel("Frequency")
+    plt.show()
