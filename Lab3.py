@@ -94,7 +94,7 @@ def comparestats(matrix):
 
 #A10
 def histdata(feature,buckets):
-    counts,edges=np.histogram(feature,bins=buckets)     #data in ranges
+    counts,edges=np.histogram(feature,bins=buckets)     
     return counts,edges,mean(feature),variance(feature)
 
 if __name__ == "__main__":
